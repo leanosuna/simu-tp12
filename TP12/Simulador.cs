@@ -32,11 +32,21 @@ namespace TP12
         const double FDP_IA16_scale = 19378.32363875735;
         LogNormal _FDP_IAT16 = new LogNormal(Math.Log(FDP_IA16_scale), FDP_IA16_s);
 
+        // FDP tiempo atencion tx enviadas al emisor
         const double FDP_TAE_loc = 5153880;
         const double FDP_TAE_scale = 2303582.325727702;
         Laplace _FDP_TAE = new Laplace(FDP_TAE_loc, FDP_TAE_scale);
 
+        // FDP tiempo atencion tx resueltas por adquiriente
+        const double FDP_TAA_a = 123;
+        const double FDP_TAA_b = 123;
+        const double FDP_TAA_loc = 123;
+        const double FDP_TAA_scale = 123;
+        Beta _FDP_TAA = new Beta(FDP_TAA_a, FDP_TAA_b);
+
         #endregion
+
+
         const double HV = double.MaxValue;
 
         #region vars
@@ -46,6 +56,7 @@ namespace TP12
         double TPIT = 0;
 
         #endregion
+
         public void Configurar()
         {
 
@@ -87,6 +98,7 @@ namespace TP12
             Console.WriteLine($"Fin en T {T} ");
         }
 
+        #region FDP funciones
         double FDP_Monto()
         {
             return _FDP_monto.Sample() + FDP_monto_loc;
@@ -115,7 +127,11 @@ namespace TP12
         {
             return _FDP_TAE.Sample();
         }
-
+        double FDP_TAA()
+        {
+            return _FDP_TAA.Sample() * FDP_TAA_scale + FDP_TAA_loc;
+        }
+        #endregion
         public string F2(double val)
         {
             return val.ToString("F2");
