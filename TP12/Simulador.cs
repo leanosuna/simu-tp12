@@ -32,6 +32,10 @@ namespace TP12
         const double FDP_IA16_scale = 19378.32363875735;
         LogNormal _FDP_IAT16 = new LogNormal(Math.Log(FDP_IA16_scale), FDP_IA16_s);
 
+        const double FDP_TAE_loc = 5153880;
+        const double FDP_TAE_scale = 2303582.325727702;
+        Laplace _FDP_TAE = new Laplace(FDP_TAE_loc, FDP_TAE_scale);
+
         #endregion
         const double HV = double.MaxValue;
 
@@ -105,6 +109,11 @@ namespace TP12
         double FDP_IAT16()
         {
             return _FDP_IAT16.Sample() + FDP_IA16_loc;
+        }
+
+        double FDP_TAE()
+        {
+            return _FDP_TAE.Sample();
         }
 
         public string F2(double val)
