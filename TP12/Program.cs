@@ -2,11 +2,11 @@
 {
     internal class Program
     {
-        static Simulador simulador;
+        static Sim simulador;
 
         static void Main(string[] args)
         {
-            simulador = new Simulador();
+            simulador = new Sim();
             simulador.Configurar();
             simulador.Iniciar();
         }
