@@ -54,7 +54,7 @@ namespace TP12
         public static double T = 0;
         ///FDPs en us, 10e6
         /// 24hs = 24 * 3600 s
-        double TF = 10 * 3600 * 10e6;
+        double TF = 1 * 3600 * 10e6;
         double TPIT = 0;
         int it = 0;
 
@@ -132,8 +132,8 @@ namespace TP12
                 it++;
             }
 
-            //for (int i = 0; i < 100; i++)
-            //    Console.WriteLine(F2(FDP_Monto()));
+            for (int i = 0; i < 100; i++)
+                Console.WriteLine(F2(FDP_TAA()));
             Console.WriteLine();
             Resultados();
 
@@ -171,11 +171,11 @@ namespace TP12
 
             Console.ForegroundColor = ConsoleColor.White;
 
-            Console.WriteLine($"Resultados de VISA ({pV}% TX)");
+            Console.WriteLine($"Resultados de VISA ({pV}% TX {VISA.N})");
             VISA.Resultados();
-            Console.WriteLine($"Resultados de AMEX ({pA}% TX)");
+            Console.WriteLine($"Resultados de AMEX ({pA}% TX {AMEX.N})");
             AMEX.Resultados();
-            Console.WriteLine($"Resultados de MASTER ({pM}% TX)");
+            Console.WriteLine($"Resultados de MASTER ({pM}% TX {MASTER.N})");
             MASTER.Resultados();
 
 

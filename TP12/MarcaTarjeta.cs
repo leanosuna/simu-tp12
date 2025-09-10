@@ -74,12 +74,14 @@
             // adquiriente
             SumaAdquirientes++;
             TA = Sim.FDP_TAA();
-            TC[idx] = TA + (TCMayor ? TC[idx] : T);
+            var prevTc = TC[idx];
+            TC[idx] = TA + (TCMayor ? prevTc : T);
 
-            var diff = TC[idx] - T;
+            //var diff = TC[idx] - T;
+            var diff = TC[idx] - (TCMayor ? prevTc : T);
             SumaDemora += diff;
-            //if ((diff) < 15000000) //15 seg - 15000 ms - 15000000 us 
-            if ((diff) < 8000000) //8 seg
+
+            if ((diff) < 800000) //4 seg
             {
                 return;
             }
@@ -92,9 +94,9 @@
         {
             Console.ForegroundColor = ConsoleColor.White;
 
-            var pTimeout = (RechazadosTimeout / N);
+            var pTimeout = (RechazadosTimeout / SumaAdquirientes);
             Console.Write("Timeouts: ");
-            Console.Write($"{Sim.ValorConColorPorcentaje(pTimeout)} %\n");
+            Console.Write($"{Sim.ValorConColorPorcentaje(pTimeout)} % ({RechazadosTimeout})\n");
             Console.ForegroundColor = ConsoleColor.White;
 
             var pPerdida = SumaMontoRechazadosTimeout * 10e6 / Sim.T;
